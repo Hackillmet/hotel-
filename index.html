@@ -9,7 +9,97 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+<style>
+
+:root{
+  --ink:#102b36;--ink2:#173b48;--cream:#f5f1e8;--paper:#fbfaf6;--white:#fff;
+  --muted:#77868c;--line:#dedbd3;--gold:#e9ae35;--accent:#d8e9df;--shadow:0 30px 80px rgba(16,43,54,.12);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:Manrope,system-ui,sans-serif;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.035;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.6'/%3E%3C/svg%3E");z-index:1000}
+a{text-decoration:none;color:inherit}button,input,textarea{font:inherit}
+.progress{position:fixed;left:0;top:0;height:3px;width:0;background:var(--gold);z-index:1001}
+.nav{height:82px;padding:0 5vw;display:flex;align-items:center;justify-content:space-between;position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(251,250,246,.78);backdrop-filter:blur(18px);border-bottom:1px solid rgba(16,43,54,.07)}
+.logo{display:flex;align-items:center;gap:11px}
+.logo-mark{width:39px;height:39px;border-radius:12px;background:var(--ink);color:#fff;display:grid;place-items:center;font-family:Georgia,serif;font-size:21px}
+.logo b{display:block;font-size:17px;line-height:1}.logo small{display:block;color:var(--muted);font-size:10px;letter-spacing:.08em;text-transform:uppercase;margin-top:5px}
+.nav nav{display:flex;gap:32px;font-size:12px;font-weight:800;color:#55666c;text-transform:uppercase;letter-spacing:.08em}
+.nav nav a{transition:color .2s}.nav nav a:hover{color:var(--ink)}
+.nav-phone{display:flex;gap:12px;align-items:center;font-size:13px;font-weight:800}.nav-phone i{font-style:normal;width:34px;height:34px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;transition:.3s}.nav-phone:hover i{background:var(--ink);color:#fff;transform:rotate(45deg)}
+.burger{display:none;border:0;background:none;width:40px;height:40px}.burger span{display:block;width:22px;height:2px;background:var(--ink);margin:6px auto}
+.hero{min-height:100vh;padding:140px 7vw 80px;display:grid;grid-template-columns:1fr .92fr;gap:7vw;align-items:center;max-width:1500px;margin:auto}
+.pill{display:inline-flex;align-items:center;gap:9px;padding:9px 13px;border:1px solid var(--line);border-radius:999px;color:#65757b;font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+.dot{width:7px;height:7px;background:#6aaf7d;border-radius:50%;box-shadow:0 0 0 5px rgba(106,175,125,.13)}
+.hero h1{font-size:clamp(55px,7vw,104px);line-height:.95;letter-spacing:-.065em;margin:25px 0 27px;font-weight:700}
+h1 em,h2 em,blockquote em{font-family:"Playfair Display",Georgia,serif;font-weight:500}
+.hero-copy>p{max-width:600px;font-size:18px;line-height:1.75;color:#617177}
+.hero-actions{display:flex;gap:11px;margin:32px 0}
+.button{border:0;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:18px;padding:15px 21px;border-radius:999px;font-size:12px;font-weight:800;transition:transform .25s,box-shadow .25s,background .25s}
+.button:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(16,43,54,.13)}
+.button span{font-size:16px}.button-dark{background:var(--ink);color:#fff}.button-light{background:#fff;border:1px solid var(--line)}.button-white{background:#fff;color:var(--ink)}.button-outline{background:transparent;border:1px solid var(--line)}
+.hero-rating{display:flex;align-items:center;gap:10px;font-size:12px;color:var(--muted)}.hero-rating strong{font-size:17px;color:var(--ink)}.mini-stars,.big-stars{color:var(--gold);letter-spacing:2px}
+.hero-visual{position:relative}.hero-image-wrap{height:680px;border-radius:38px;overflow:hidden;position:relative;box-shadow:var(--shadow);transform:rotate(1deg);transition:transform .8s}.hero-visual:hover .hero-image-wrap{transform:rotate(0) scale(1.008)}
+.hero-image-wrap img{width:100%;height:100%;object-fit:cover}.image-gradient{position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(8,24,31,.62))}
+.floating-tag{position:absolute;left:25px;bottom:24px;color:#fff}.floating-tag span{display:block;font-size:10px;letter-spacing:.15em;opacity:.7}.floating-tag b{display:block;font-size:22px;margin:5px 0}.floating-tag small{font-size:11px;color:#d6e0e3}
+.orbit-card{position:absolute;right:-25px;top:70px;width:110px;height:110px;border-radius:50%;background:var(--accent);display:grid;place-items:center;align-content:center;box-shadow:0 15px 40px rgba(16,43,54,.12);animation:float 4s ease-in-out infinite}.orbit-card span{font-size:25px;font-weight:800}.orbit-card small{font-size:9px;text-transform:uppercase;letter-spacing:.12em}
+.scribble{position:absolute;left:-45px;bottom:100px;font-family:"Playfair Display",serif;font-size:19px;line-height:1.1;transform:rotate(-9deg);color:#5d6f75}.scribble em{font-size:25px}
+@keyframes float{50%{transform:translateY(-12px) rotate(3deg)}}
+.marquee{overflow:hidden;background:var(--ink);color:#fff;white-space:nowrap;padding:15px 0;font-size:11px;font-weight:800;letter-spacing:.18em}.marquee div{display:inline-block;animation:marquee 25s linear infinite}.marquee b{color:var(--gold);padding:0 28px}@keyframes marquee{to{transform:translateX(-30%)}}
+.section{max-width:1280px;margin:auto;padding-left:5vw;padding-right:5vw}
+.about{padding-top:150px;padding-bottom:145px}.section-kicker{font-size:10px;letter-spacing:.18em;text-transform:uppercase;font-weight:800;color:#89979b}.about-main{display:grid;grid-template-columns:.8fr 1.2fr;gap:9vw;margin-top:35px}.about h2,.gallery h2,.review-intro h2,.contact-copy h2{font-size:clamp(42px,5vw,74px);line-height:.98;letter-spacing:-.055em;margin:0}.lead-text{font-size:19px;line-height:1.75;color:#5f7076;margin:0 0 38px;max-width:650px}
+.feature-grid{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line)}.feature-grid article{padding:25px 20px 25px 0;border-bottom:1px solid var(--line)}.feature-grid article:nth-child(odd){border-right:1px solid var(--line);padding-right:30px}.feature-grid article:nth-child(even){padding-left:30px}.feature-grid span{font-size:9px;color:#a0abad;letter-spacing:.12em}.feature-grid b{display:block;font-size:15px;margin:10px 0 6px}.feature-grid p{margin:0;color:#7b898e;font-size:12px;line-height:1.6}
+.gallery-section{background:var(--cream);padding:130px 0 140px}.gallery-heading{display:grid;grid-template-columns:.8fr 1.2fr;gap:9vw;align-items:end}.gallery-heading p{color:var(--muted);font-size:13px;margin-top:17px}.gallery{max-width:1400px;margin:55px auto 0;padding:0 3vw;display:grid;grid-template-columns:1.45fr .72fr .72fr;grid-template-rows:260px 260px;gap:15px}.photo{position:relative;padding:0;border:0;overflow:hidden;border-radius:24px;cursor:pointer;background:#ddd}.photo img{width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.7,.2,1),filter .5s}.photo:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(5,20,27,.6));opacity:.6;transition:.4s}.photo:hover img{transform:scale(1.06)}.photo:hover:after{opacity:.8}.photo-main{grid-row:1/3}.photo-label{position:absolute;z-index:2;left:22px;bottom:19px;color:#fff;font-size:11px;font-weight:800;letter-spacing:.05em}.photo-label i{font-style:normal;margin-left:8px;font-size:16px}
+.reviews-section{padding:135px 0 0;background:var(--paper)}.reviews-top{display:grid;grid-template-columns:.8fr 1.2fr;gap:9vw}.review-intro{position:relative}.rating-display{display:flex;align-items:center;gap:15px;position:absolute;right:0;top:0}.rating-display strong{font-size:48px;letter-spacing:-.05em}.rating-display span{font-size:10px;color:var(--muted)}.review-intro .big-stars{font-size:16px}.review-intro h2{margin-top:55px}.review-intro>p{color:var(--muted);max-width:480px;line-height:1.7;font-size:14px}.review-intro .button{margin-top:13px}
+.review-controls{display:flex;justify-content:space-between;align-items:center;margin-top:80px;border-bottom:1px solid var(--line);padding-bottom:15px}.review-count{font-size:12px;color:var(--muted)}.review-count b{font-size:17px;color:var(--ink)}.filters{display:flex;gap:6px}.filter{border:0;background:transparent;color:#859297;font-size:11px;font-weight:800;padding:9px 13px;border-radius:999px;cursor:pointer}.filter.active{background:var(--ink);color:#fff}
+.reviews-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:20px}.review-card{background:#fff;border:1px solid #e7e4dd;border-radius:24px;padding:27px;min-height:230px;position:relative;transition:transform .35s,box-shadow .35s}.review-card:hover{transform:translateY(-5px);box-shadow:0 18px 50px rgba(16,43,54,.08)}.review-card.new{animation:cardIn .6s both}.review-card .review-top{display:flex;justify-content:space-between;gap:15px}.avatar{width:42px;height:42px;border-radius:50%;background:var(--accent);display:grid;place-items:center;font-family:"Playfair Display",serif;font-weight:600;font-size:17px}.review-author{display:flex;align-items:center;gap:11px}.review-name{font-size:13px;font-weight:800}.review-date{font-size:10px;color:#9aa5a8;margin-top:4px}.review-stars{color:var(--gold);font-size:13px;letter-spacing:2px;margin:20px 0 12px}.review-card p{font-size:13px;line-height:1.75;color:#52636a;margin:0;white-space:pre-line}.source{font-size:9px;color:#aab2b4;margin-top:20px;text-transform:uppercase;letter-spacing:.1em}.reviews-more{text-align:center;padding-top:30px;padding-bottom:120px}
+@keyframes cardIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+.quote-section{background:var(--accent);text-align:center;padding:130px 20px}.quote-mark{font-family:"Playfair Display",serif;font-size:85px;line-height:.5;color:#78978b}.quote-section blockquote{font-size:clamp(38px,5.5vw,76px);line-height:1;letter-spacing:-.045em;margin:25px 0 20px}.quote-section p{color:#71837d;font-size:11px}
+.contact-section{background:var(--ink);color:#fff}.contact-inner{display:grid;grid-template-columns:1.15fr .85fr;gap:10vw;align-items:center;padding-top:130px;padding-bottom:130px}.light{color:#9fb0b6}.contact-copy h2{margin:25px 0}.contact-copy p{color:#b7c5c9;line-height:1.75;font-size:14px}.contact-actions{display:flex;gap:15px;align-items:center;margin-top:30px}.map-link{font-size:11px;color:#c4d0d3;text-decoration:underline;text-underline-offset:4px}.contact-card{padding:38px;background:#183b48;border:1px solid rgba(255,255,255,.08);border-radius:28px}.contact-label{font-size:9px;text-transform:uppercase;letter-spacing:.15em;color:#91a8ae}.big-phone{font-size:clamp(24px,3vw,39px);font-weight:800;display:block;margin:14px 0 35px}.contact-line{display:flex;gap:13px;padding:17px 0;border-top:1px solid rgba(255,255,255,.1);color:#c4d0d3;font-size:11px;line-height:1.55}.contact-line span:first-child{width:25px}.contact-line span:first-child:first-letter{color:var(--gold)}
+footer{padding:25px 5vw;background:#0c222c;color:#799097;display:flex;justify-content:space-between;font-size:9px;letter-spacing:.12em}
+.modal-backdrop,.lightbox{position:fixed;inset:0;background:rgba(6,19,25,.72);backdrop-filter:blur(12px);display:none;align-items:center;justify-content:center;padding:20px;z-index:200}.modal-backdrop.open,.lightbox.open{display:flex;animation:fade .25s}.modal{width:min(570px,100%);background:var(--paper);border-radius:28px;padding:40px;position:relative;box-shadow:0 40px 100px rgba(0,0,0,.3);animation:modalIn .35s}.close,.lightbox-close{position:absolute;right:17px;top:13px;border:0;background:none;color:#819096;font-size:31px;cursor:pointer}.modal h2{font-size:39px;line-height:.98;letter-spacing:-.04em;margin:20px 0 8px}.modal-subtitle{color:var(--muted);font-size:12px;line-height:1.6;margin-bottom:25px}.modal form{display:grid;gap:16px}.modal label{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.1em}.modal input,.modal textarea{margin-top:7px;border:1px solid var(--line);border-radius:13px;padding:13px 14px;background:#fff;outline:none}.modal textarea{min-height:130px;resize:vertical}.modal input:focus,.modal textarea:focus{border-color:#8aa5ad;box-shadow:0 0 0 4px rgba(111,151,161,.1)}.star-picker{display:flex;gap:4px;margin-top:7px}.star-picker button{border:0;background:none;color:#d1d5d2;font-size:27px;cursor:pointer;padding:0}.star-picker button.selected,.star-picker button.active{color:var(--gold)}.form-message{font-size:11px;color:#5f7f69;min-height:16px}.lightbox{background:rgba(4,13,17,.9)}.lightbox-inner{max-width:1100px;max-height:90vh;text-align:center}.lightbox img{max-width:100%;max-height:82vh;border-radius:22px;box-shadow:0 30px 100px #000}.lightbox-inner div{color:#fff;margin-top:12px;font-size:11px}.lightbox-close{color:#fff;z-index:3}
+.reveal{opacity:0;transform:translateY(25px);transition:opacity .8s ease,transform .8s ease}.reveal.visible{opacity:1;transform:none}.delay-1{transition-delay:.12s}
+@keyframes fade{from{opacity:0}to{opacity:1}}@keyframes modalIn{from{opacity:0;transform:translateY(20px) scale(.98)}to{opacity:1;transform:none}}
+@media(max-width:950px){
+  .nav nav{display:none}.burger{display:block}.nav-phone span{display:none}
+  .nav.menu-open nav{display:flex;position:absolute;left:0;right:0;top:82px;background:var(--paper);padding:25px 5vw;flex-direction:column;border-bottom:1px solid var(--line)}
+  .hero{grid-template-columns:1fr;padding-top:125px}.hero-visual{max-width:700px;margin:auto;width:100%}.hero-image-wrap{height:600px}.scribble{display:none}
+  .about-main,.gallery-heading,.reviews-top,.contact-inner{grid-template-columns:1fr;gap:40px}
+  .rating-display{position:static;margin-bottom:20px}.review-intro h2{margin-top:10px}
+  .gallery{grid-template-columns:1fr 1fr;grid-template-rows:400px 260px}.photo-main{grid-row:1;grid-column:1/3}.photo-kitchen,.photo-bath{grid-row:2}.photo-kitchen{grid-column:1}.photo-bath{grid-column:2}
+}
+@media(max-width:600px){
+  .nav{height:70px;padding:0 18px}.nav.menu-open nav{top:70px}.hero{padding:105px 20px 60px}.hero h1{font-size:54px}.hero-copy>p{font-size:15px}.hero-actions{flex-direction:column}.button{width:100%}.hero-image-wrap{height:500px;border-radius:25px}.orbit-card{right:-8px;top:35px;width:90px;height:90px}.orbit-card span{font-size:20px}
+  .about,.reviews-section{padding-top:95px}.about-main,.gallery-heading,.reviews-top{padding-left:20px;padding-right:20px}.about{padding-bottom:95px}.feature-grid{grid-template-columns:1fr}.feature-grid article:nth-child(odd){border-right:0;padding-right:0}.feature-grid article:nth-child(even){padding-left:0}.gallery-section{padding-top:95px}.gallery{padding:0 20px;grid-template-columns:1fr;grid-template-rows:430px 260px 260px}.photo-main{grid-column:1}.photo-kitchen,.photo-bath{grid-column:1}
+  .review-controls{margin-top:55px;padding-left:20px;padding-right:20px;flex-direction:column;align-items:flex-start;gap:15px}.reviews-grid{grid-template-columns:1fr;padding:0 20px}.reviews-more{padding-bottom:90px}.contact-inner{padding-top:90px;padding-bottom:90px}.contact-actions{flex-direction:column;align-items:stretch}.map-link{text-align:center}.contact-card{padding:27px 22px}footer{padding:22px 20px}
+  .modal{padding:30px 22px}.modal h2{font-size:33px}
+}
+
+
+/* ===== GITHUB PAGES + CINEMATIC TRANSITIONS ===== */
+main > section { scroll-margin-top: 82px; position: relative; }
+.page-curtain { position: fixed; inset: 0; background: #102b36; z-index: 9999; pointer-events: none; transform: translateY(102%); opacity: 0; }
+.page-curtain.play { animation: curtainSlide .72s cubic-bezier(.77,0,.18,1) both; }
+@keyframes curtainSlide { 0%{transform:translateY(102%);opacity:1} 42%{transform:translateY(0);opacity:1} 58%{transform:translateY(0);opacity:1} 100%{transform:translateY(-102%);opacity:0} }
+.slide-section { opacity: 0; transform: translateY(35px); transition: opacity .8s ease, transform .8s cubic-bezier(.2,.75,.2,1); }
+.slide-section.in-view { opacity: 1; transform: none; }
+.chapter-marker { position:absolute; right:4vw; top:50%; transform:translateY(-50%) rotate(-90deg); color:rgba(16,43,54,.24); font-size:9px; font-weight:800; letter-spacing:.25em; text-transform:uppercase; pointer-events:none; white-space:nowrap; }
+.contact-section .chapter-marker { color:rgba(255,255,255,.22); }
+.nav nav a { position:relative; overflow:hidden; }
+.nav nav a::after { content:""; position:absolute; left:0; bottom:-2px; width:100%; height:1px; background:currentColor; transform:translateX(-105%); transition:transform .35s ease; }
+.nav nav a:hover::after, .nav nav a.active::after { transform:translateX(0); }
+.hero-image-wrap img, .photo img { will-change: transform; }
+.hero-image-wrap img { transition: transform 1.1s cubic-bezier(.2,.65,.2,1); }
+.gallery-item img { transition: transform .8s ease; }
+/* Important: cards are visible by default. JS adds animation classes without hiding them. */
+.review-card { opacity:1; transform:none; }
+.review-card.card-visible { animation: reviewCardIn .65s cubic-bezier(.2,.75,.2,1) both; }
+@keyframes reviewCardIn { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:none} }
+@media (max-width:600px){ .chapter-marker{right:12px;font-size:7px} main > section{scroll-margin-top:70px;} }
+@media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto} .page-curtain,.slide-section,.review-card.card-visible{animation:none!important;transition:none!important}.slide-section{opacity:1;transform:none} }
+
+</style>
 </head>
 <body>
   <div class="page-curtain" id="pageCurtain" aria-hidden="true"></div>
@@ -190,6 +280,218 @@
   <script>
     window.INITIAL_REVIEWS = [{"name": "Николай Маштаков", "date": "30 августа 2025", "rating": 5, "text": "Спасибо огромное Юрию и Анне, прекрасный номер, замечательные условия. Если отдыхать в Голубицкой, только в ЮАНЬ!!! 👍👍👍👍👍👍👍👍👍 Рекомендую это место для отдыха", "source": "Яндекс Карты"}, {"name": "Анастасия К.", "date": "29 августа 2025", "rating": 5, "text": "Хочу выразить огромную благодарность Юрию за замечательный отдых в ст.Голубицкая. Первый раз отдыхали на Азовском море и по чистой случайности, нашли объявление. Во-первых, абсолютно комфортный номер (есть все, начиная от посуды и заканчивая разными мелочами)....", "source": "Яндекс Карты"}, {"name": "Анастасия Ш.", "date": "18 июля", "rating": 5, "text": "Отдыхали здесь с 12 по 19 июля. Остались в полном восторге! Шикарные условия: чистый номер, новое постельное белье, полотенца, утюг, фен, вай фай! Очень гостеприимные хозяева 🫶 сидим, собираем вещи и не хотим уезжать 😭 очень рекомендую", "source": "Яндекс Карты"}, {"name": "Галина мурадова", "date": "23 августа 2025", "rating": 5, "text": "Очень хороший гостевой дом, гостеприимные хозяева, чистые, современные номера. Отдыхом довольны на 💯. Море близко, множество магазинов, кафе. Для семейного отдыха супер место", "source": "Яндекс Карты"}, {"name": "652772 Лимонова", "date": "26 июня", "rating": 5, "text": "Отдыхали семьей у Юрия в ЮАНЬ с 20.06.2026 по 25.06. Впервые побывали в Голубицкой, но теперь при возможности обязательно вернемся туда! Мы остались очень довольны!!! У Юрия всё очень чисто, аккуратно, очень уютно. Сам хозяин очень доброжелательный и внимательный к своим гостям. Супер хозяин! Спасибо!", "source": "Яндекс Карты"}, {"name": "Ольга Смирнова", "date": "31 августа 2025", "rating": 5, "text": "Спасибо большое Юрию и Анне за гостеприимность,за уютный удобный номер,отдых удался! Обязательно вернёмся в следующем году.", "source": "Яндекс Карты"}, {"name": "Анастасия Ш.", "date": "5 сентября 2025", "rating": 5, "text": "Очень понравилось отдыхать здесь! Номер просторный, кухню и санузел делить ни с кем не нужно, чисто, уютно, гостеприимно и море рядом - 5 минут идти👍, парковка около дома👍 В Голубицкой полно развлечений и для детей и взрослых, кафе, магазины, рыбалка👍 приедем еще! ❤️", "source": "Яндекс Карты"}, {"name": "Элика Пашинян", "date": "24 июля", "rating": 5, "text": "Снимали номер в Голубицкой на неделю и остались очень довольны. Главный плюс — до Азовского моря буквально 5 минут пешком. Пляж песчано-ракушечный, море теплое, мелководное. Сам номер просторный, чистый, со свежим ремонтом. Внутри было всё необходимое:....", "source": "Яндекс Карты"}, {"name": "Румянцев Анатолий", "date": "28 июля", "rating": 5, "text": "Отдыхали семьёй, удобный номер с кухней, море в пяти минутах ходьбы, магазин в шаговой доступности, доброжелательные хозяева, окажут необходимую помощь! Рекомендую данный гостевой дом. Юра, Аня спасибо за прекрасный отдых! 👍", "source": "Яндекс Карты"}, {"name": "Евгения М.", "date": "3 сентября 2025", "rating": 5, "text": "Отдыхали у Юрия и Ани в августе 2025 г.. Это были замечательные 10 дней. Отличные номера,где все продумано до мелочей! Своя кухня,санузел. Кругом чистота. Дом расположен в минутах 6 от моря.Рядом все магазины с доступными ценами. Чистые улицы,...", "source": "Яндекс Карты"}, {"name": "Надежда К.", "date": "17 августа", "rating": 5, "text": "Гостевой дом «Юань» у Юрия и Анны — место, куда хочется возвращаться. Отдыхала с конца июля по начало августа 2026 года, 15 дней. Хотелось уютное место без толпы и «курортного конвейера» — и нашла именно то, что нужно, а точнее порекомендовали друзья, которые не первый год...", "source": "Яндекс Карты"}, {"name": "Дмитрий А.", "date": "2 июля", "rating": 5, "text": "Отдыхали семьёй у Юрия в июне 2026. Уже второй год подряд едем к нему. Все очень нравится, номер новый (3 этаж), хозяина очень внимательный и вежливый. Инфраструктура развита хорошо, есть Магнит, Чижик, КБ и ДР. магазины. Море теплое было, пляж хороший....", "source": "Яндекс Карты"}, {"name": "Общество с ограниченной ответственностью Б.", "date": "25 июня", "rating": 5, "text": "Отдыхали с мужем в июне неделю, нам все очень понравилось. 👍 Доброжелательный, приветливый и общительный хозяин 🤗 Шикарные условия, новый, чистый и уютный номер. Все необходимое для жизни есть. Кухня, вся посуда, микроволновка, холодильник, плита, телевизор...", "source": "Яндекс Карты"}, {"name": "Арина Туманова", "date": "24 июля", "rating": 5, "text": "Останавливались с подругами на неделю и остались очень довольными! Номер уютный, всё продумано до мелочей: чистая постель, удобная мебель, кухня с посудой. Особенно порадовало, что до пляжа - рукой подать. Хозяева приветливые, всегда на связи. 10/10, рекомендуем!", "source": "Яндекс Карты"}, {"name": "Оля Ш.", "date": "21 июля", "rating": 5, "text": "Хочу сказать огромное спасибо хозяевам этой гостиницы - Анне и Юрию 🙌🏻\n\nВ номере было всё необходимое для комфортного проживания и очень...", "source": "Яндекс Карты"}, {"name": "Максим", "date": "26 июля", "rating": 5, "text": "Очень добрые хозяева, разместили, помогли найти магазин, спасибо, советую", "source": "Яндекс Карты"}];
   </script>
-  <script src="script.js"></script>
+<script>
+
+(() => {
+  const $ = (s, root=document) => root.querySelector(s);
+  const $$ = (s, root=document) => [...root.querySelectorAll(s)];
+  const STORAGE = "yuan_reviews_v2";
+  const initial = Array.isArray(window.INITIAL_REVIEWS) ? window.INITIAL_REVIEWS : [];
+  let allReviews = [];
+  let filter = "all";
+  let shown = 6;
+
+  function esc(v) {
+    return String(v ?? "").replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
+  }
+  function stars(n) {
+    n = Math.max(1, Math.min(5, Number(n) || 5));
+    return "★".repeat(n) + "☆".repeat(5-n);
+  }
+  function avatar(name) {
+    const clean = String(name || "Г").trim();
+    return esc(clean.slice(0,1).toUpperCase());
+  }
+  function getReviews() {
+    try {
+      const saved = JSON.parse(localStorage.getItem(STORAGE));
+      if (Array.isArray(saved) && saved.length) return saved;
+    } catch {}
+    return initial.map(x => ({...x}));
+  }
+  function saveReviews(items) {
+    localStorage.setItem(STORAGE, JSON.stringify(items));
+  }
+  function filtered() {
+    return filter === "all" ? allReviews : allReviews.filter(r => Number(r.rating) === Number(filter));
+  }
+  function render() {
+    const list = $("#reviewsList");
+    const items = filtered();
+    const visible = items.slice(0, shown);
+    $("#reviewCount").textContent = items.length;
+    if (!visible.length) {
+      list.innerHTML = `<div class="empty-review">По этому фильтру отзывов пока нет.</div>`;
+      $("#showMore").style.display = "none";
+      return;
+    }
+    list.innerHTML = visible.map((r,i) => `
+      <article class="review-card ${i < 2 ? "new" : ""}">
+        <div class="review-top">
+          <div class="review-author">
+            <div class="avatar">${avatar(r.name)}</div>
+            <div><div class="review-name">${esc(r.name)}</div><div class="review-date">${esc(r.date)}</div></div>
+          </div>
+          <div class="mini-stars">${stars(r.rating)}</div>
+        </div>
+        <div class="review-stars">${stars(r.rating)}</div>
+        <p>${esc(r.text)}</p>
+        <div class="source">${esc(r.source || "Отзыв гостя")}</div>
+      </article>
+    `).join("");
+    $("#showMore").style.display = items.length > shown ? "inline-flex" : "none";
+
+    // Animate newly rendered cards, but never leave them hidden.
+    requestAnimationFrame(() => {
+      $$(".review-card", list).forEach((card, i) => {
+        card.classList.remove("card-visible");
+        setTimeout(() => card.classList.add("card-visible"), i * 55);
+      });
+    });
+  }
+
+  // Header + mobile menu
+  $("#burger").addEventListener("click", () => $(".nav").classList.toggle("menu-open"));
+  $$('nav a').forEach(a => a.addEventListener("click", () => $(".nav").classList.remove("menu-open")));
+
+  // Scroll progress
+  const progress = $("#progress");
+  addEventListener("scroll", () => {
+    const h = document.documentElement.scrollHeight - innerHeight;
+    progress.style.width = `${h ? scrollY / h * 100 : 0}%`;
+  }, {passive:true});
+
+  // Reveal animations
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {threshold:.12});
+  $$(".reveal").forEach(el => observer.observe(el));
+
+  // Gallery lightbox
+  const lightbox = $("#lightbox");
+  $$(".photo").forEach(card => card.addEventListener("click", () => {
+    $("#lightboxImg").src = card.dataset.image;
+    $("#lightboxTitle").textContent = card.dataset.title;
+    lightbox.classList.add("open");
+    lightbox.setAttribute("aria-hidden","false");
+  }));
+  function closeLightbox() {
+    lightbox.classList.remove("open");
+    lightbox.setAttribute("aria-hidden","true");
+  }
+  $("#closeLightbox").addEventListener("click", closeLightbox);
+  lightbox.addEventListener("click", e => { if (e.target === lightbox) closeLightbox(); });
+
+  // Reviews
+  allReviews = getReviews();
+  render();
+
+  $$(".filter").forEach(btn => btn.addEventListener("click", () => {
+    $$(".filter").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    filter = btn.dataset.filter;
+    shown = 6;
+    render();
+  }));
+  $("#showMore").addEventListener("click", () => { shown += 6; render(); });
+
+  // Modal
+  const modal = $("#reviewModal");
+  function openModal() { modal.classList.add("open"); modal.setAttribute("aria-hidden","false"); document.body.style.overflow="hidden"; }
+  function closeModal() { modal.classList.remove("open"); modal.setAttribute("aria-hidden","true"); document.body.style.overflow=""; }
+  $("#openReview").addEventListener("click", openModal);
+  $("#closeReview").addEventListener("click", closeModal);
+  modal.addEventListener("click", e => { if(e.target === modal) closeModal(); });
+
+  // Star picker
+  const starButtons = $$("#starPicker button");
+  const ratingInput = $('#reviewForm input[name="rating"]');
+  starButtons.forEach(btn => btn.addEventListener("click", () => {
+    const value = Number(btn.dataset.value);
+    ratingInput.value = value;
+    starButtons.forEach(b => b.classList.toggle("selected", Number(b.dataset.value) <= value));
+  }));
+
+  // New reviews. On a static site localStorage is used; when the site is put behind a server,
+  // this can be replaced by a shared database/API without changing the UI.
+  $("#reviewForm").addEventListener("submit", e => {
+    e.preventDefault();
+    const fd = new FormData(e.currentTarget);
+    const name = String(fd.get("name") || "").trim();
+    const text = String(fd.get("text") || "").trim();
+    const rating = Number(fd.get("rating") || 5);
+    if (!name || !text) return;
+    const review = {
+      name, text, rating,
+      date: new Date().toLocaleDateString("ru-RU", {day:"numeric", month:"long", year:"numeric"}),
+      source: "Отзыв на сайте"
+    };
+    allReviews.unshift(review);
+    saveReviews(allReviews);
+    filter = "all"; shown = 6;
+    $$(".filter").forEach(b => b.classList.toggle("active", b.dataset.filter === "all"));
+    render();
+    e.currentTarget.reset();
+    ratingInput.value = 5;
+    starButtons.forEach(b => b.classList.toggle("selected", Number(b.dataset.value) <= 5));
+    $("#formMessage").textContent = "Спасибо! Ваш отзыв добавлен.";
+    setTimeout(closeModal, 900);
+    setTimeout(() => $("#reviews").scrollIntoView({behavior:"smooth"}), 1050);
+  });
+
+  // ESC closes overlays
+  addEventListener("keydown", e => {
+    if (e.key === "Escape") {
+      closeModal();
+      closeLightbox();
+    }
+  });
+})();
+
+
+/* ===== CINEMATIC NAVIGATION ===== */
+(() => {
+  const curtain = document.getElementById("pageCurtain");
+  const sections = [...document.querySelectorAll("main > section")];
+  const navLinks = [...document.querySelectorAll(".nav nav a")];
+
+  const sectionObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add("in-view");
+    });
+  }, { threshold:.12, rootMargin:"-5% 0px -5% 0px" });
+  sections.forEach(s => sectionObserver.observe(s));
+
+  navLinks.forEach(link => {
+    link.addEventListener("click", e => {
+      const href = link.getAttribute("href");
+      if (!href || !href.startsWith("#")) return;
+      const target = document.querySelector(href);
+      if (!target) return;
+      e.preventDefault();
+      document.querySelector(".nav")?.classList.remove("menu-open");
+      curtain?.classList.remove("play");
+      void curtain?.offsetWidth;
+      curtain?.classList.add("play");
+      setTimeout(() => target.scrollIntoView({behavior:"smooth", block:"start"}), 260);
+    });
+  });
+
+  const activeObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      navLinks.forEach(a => a.classList.toggle("active", a.getAttribute("href") === "#" + entry.target.id));
+    });
+  }, { threshold:.4 });
+  sections.forEach(s => activeObserver.observe(s));
+})();
+
+</script>
 </body>
 </html>
+
